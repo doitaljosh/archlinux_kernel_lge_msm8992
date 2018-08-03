@@ -1,0 +1,28 @@
+# archlinux_kernel_lge_msm8992
+
+WHAT IS CURRENTLY IMPLEMENTED:
+
+- Virtual Terminal
+- Multiple devpts instances
+- Ralink USB WiFi drivers (rt2800usb, etc)
+- Enhanced control group support among other systemd-specific options
+- bcmdhd firmware/configs relocated to /lib/firmware
+- Auto mount devtmpfs
+- SysV IPC
+- PID, NET, IPC, UTS namespaces
+- USB Gadget Serial
+- Framebuffer console/tux logo drivers enabled
+
+TODO LIST:
+
+- Modularize the MSM KGSL graphics driver as it doesn't play well with FBCON.
+- Backport freedreno MSM DRM/KMS driver.
+- Full systemd init system support
+- Most other things need to be done in the userland.
+- If possible, develop a working mainline kernel for this lovely device.
+
+KNOWN BUGS:
+
+- If user namespace is enabled, strict UID/GID checking is also enabled which breaks compilation with a long series of errors about 'kuid_t'.
+- FBCON driver conflicts with KGSL when compiled as a module. Causes kernel panic when modprobed.
+- Using systemd as init results in 'Kernel Panic: not syncing. Attempted to kill init!'
